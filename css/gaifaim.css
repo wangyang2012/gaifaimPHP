@@ -1,0 +1,69 @@
+body {
+	background-image: url("../img/background.jpg");
+	background-position-x: center;
+	background-position-y: top;
+	background-position: center top;
+	background-repeat: repeat;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+a:hover {
+	cursor: pointer;	
+}
+
+li>a {
+	color: #FFFFFF;
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 15px;
+	line-height: 1;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+#dialog-login {
+	position: absolute;
+	left: 500px;
+	top: 30px;
+	width: 400px;
+	background-color: black;
+	color: rgb(207, 207, 98);
+}
+
+#dialog-reserver {
+	position: absolute;
+	left: 500px;
+	top: 30px;
+	width: 400px;
+	background-color: black;
+	color: rgb(207, 207, 98);
+}
+
+.titre1 {
+	line-height: 80px;
+	text-transform: uppercase;
+	font-size: 28px;
+	text-align: center;
+	font-family: 'Open Sans',sans-serif;
+}
+
+#menu-midi {
+	color: #FF0000;	
+}
+
+#livraison-gratuite {
+	color: #FFA500;
+}
+
+#bonjour {
+	color: rgb(207, 207, 98);
+	font-style: italic;
+}
