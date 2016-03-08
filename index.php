@@ -11,51 +11,48 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
 <title>Gaifaim - Accueil</title>
-<?php
-	session_start();
-?>
 
 <script>
 	
-	// function reserver() {
-		// alert("${logged}");
-		// if ("${logged}" == "true") {
-			// showFormReserver();
-		// } else {
-			// alert("Veuillez vous connecter!");
-			// showLoginForm();
-		// }
-	// }
-	
-	function hideFormReserver() {
-		$("#dialog-reserver").hide("slow");
-	}
-	
-	function showFormReserver() {
-		$("#dialog-reserver").show("slow");
-	}
-	
-	function showLoginForm() {
-		// var dialog = $("div.dialog-login");
-		// $("#dialog-login").show("slow");
-		
-		$("#dialog-login").dialog("open");
-	}
-	
-	function hideLoginForm() {
-		$("#dialog-login").hide("slow");
-	}
-	
-	$(function() {
-		$("#dialog-login").dialog({
-			autoOpen: false
-		});
-	});
-		
 		
 	// dialogue reserver
 	$(document).ready(function() {
-		$("#dialog-login").hide("slow");
+		<?php
+			session_start();
+			if (isset($_SESSION['msgErreur']) && !empty($_SESSION['msgErreur'])) {
+				echo "alert('".$_SESSION['msgErreur']."');";
+				// echo "$('#msgModal').modal('show');";
+				echo "console.log('".$_SESSION['msgErreur']."');";
+			}
+		?>
+		// $('#loginForm').formValidation({
+			// framework: 'bootstrap',
+			// excluded: ':disabled',
+			// icon: {
+				// valid: 'glyphicon glyphicon-ok',
+				// invalid: 'glyphicon glyphicon-remove',
+				// validating: 'glyphicon glyphicon-refresh'
+			// },
+			// fields: {
+				// username: {
+					// validators: {
+						// notEmpty: {
+							// message: 'The username is required'
+						// }
+					// }
+				// },
+				// password: {
+					// validators: {
+						// notEmpty: {
+							// message: 'The password is required'
+						// }
+					// }
+				// }
+			// }
+		// });
+	
+	
+		// $("#dialog-login").hide("slow");
 		$("#dialog-reserver").hide("slow");
 		   
 		  // $('#formReserver').submit(function(event) {
@@ -125,7 +122,7 @@
 	          <div class="navbar-form navbar-right inline-form" id="seConnecterField">
 				<?php
 					if (empty($_SESSION['login']))
-						echo '<a onClick="javascript:showLoginForm()">Se connecter</a>';
+						echo '<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>';
 					else
 						echo '<div id="bonjour">Bonjour, '. $_SESSION['login'] .'</div>    <a href="deconnexion.php">Deconnexion</a>';
 				?>
@@ -186,38 +183,44 @@
 		</footer>
 	</div>
 
-	<!-- 	LOGIN -->
-	<div id="dialog-login" title="Se connecter">
-		<form id="formLogin" class="form-horizontal col-lg-11" action="login.php" method="POST">
-			<header>Login</header>
-				<a class="pull-right"  onClick="javascript:hideLoginForm()">X</a>
-			<div class="row">
-				<div id="loginFormResponse"></div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<label for="login" class="col-lg-4 control-label">Login : </label>
-					<div class="col-lg-8">
-						<input type="text" class="form-control" id="login" name="login">
-					</div>
+	<!-- MODAL LOGIN -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h5 class="modal-title">Login</h5>
+				</div>
+
+				<div class="modal-body">
+					<!-- The form is placed inside the body of modal -->
+					<form id="loginForm" method="post" class="form-horizontal" action="login.php">
+						<div class="form-group">
+							<label class="col-xs-3 control-label">Login</label>
+							<div class="col-xs-5">
+								<input type="text" class="form-control" name="login" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-3 control-label">Mot de passe</label>
+							<div class="col-xs-5">
+								<input type="password" class="form-control" name="mdp" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-xs-5 col-xs-offset-3">
+								<button type="submit" class="btn btn-primary">Login</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group">
-					<label for="mdp" class="col-lg-4 control-label">Mot de passe : </label>
-					<div class="col-lg-8">
-						<input type="password" class="form-control" id="mdp" name="mdp">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<a href="/gaifaim/creationCompte">Créer un compte</a>
-					<button class="pull-right btn btn-default">Connecter</button>
-				</div>
-			</div>
-			<div class="form-group"></div>
-		</form>
+		</div>
 	</div>
 
 
@@ -293,5 +296,28 @@
 			</div>
 		</form>
 	</div>
+	
+	<!--
+<div class="modal hide fade" id="msgModal">
+	<div class="modal-header">
+	<a class="close" data-dismiss="modal">X</a>
+	<h3>Message</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+		<?php
+			// if (isset($_SESSION['msgErreur'])) {
+				// echo $_SESSION['msgErreur'];
+			// }
+		?>
+		PROBLEME§
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn">Close</a>
+		<a href="#" class="btn btn-primary">Save changes</a>
+	</div>
+</div>
+-->
 </body>
 </html>
