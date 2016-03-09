@@ -10,21 +10,28 @@ catch (Exception $e) // Si erreur
     die('Erreur : ' . $e->getMessage());
 }
 
-$query = "SELECT COUNT(*) AS membre_valide FROM utilisateur WHERE mdp = ? AND login = ?";
+$query = "SELECT * FROM utilisateur WHERE mdp = ? AND login = ?";
 $parameters = array($_POST['mdp'], $_POST['login']);
 $statement = $bdd->prepare($query);
 $statement->execute($parameters);
 $row = $statement->fetch(PDO::FETCH_ASSOC);
-$found_rows = $row['membre_valide'];
+$found_rows = $statement->rowCount();
 
 if($found_rows > 0) { // On as trouvé un membre avec ce couple mdp, login
-    $_SESSION['login'] = $_POST['login'];
+	$_SESSION['id'] = $row['id'];
+	$_SESSION['login'] = $row['login'];
+	$_SESSION['email'] = $row['email'];
+	$_SESSION['telephone'] = $row['telephone'];
+	$_SESSION['adresse'] = $row['adresse'];
 	$_SESSION['msgErreur'] = '';
 }
 else { // Personne n'existe dans la table avec ce couple mdp, login
 	$_SESSION['msgErreur'] = 'Le login et le mot de passe rentrés sont invalides';
-	if (isset($_SESSION['login']))
-		unset($_SESSION['login']);
+	unset($_SESSION['id']);
+	unset($_SESSION['login']);
+	unset($_SESSION['email']);
+	unset($_SESSION['telephone']);
+	unset($_SESSION['adresse']);
 }
 
 header('Location: index.php');

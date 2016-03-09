@@ -21,8 +21,6 @@
 			session_start();
 			if (isset($_SESSION['msgErreur']) && !empty($_SESSION['msgErreur'])) {
 				echo "alert('".$_SESSION['msgErreur']."');";
-				// echo "$('#msgModal').modal('show');";
-				echo "console.log('".$_SESSION['msgErreur']."');";
 			}
 		?>
 		// $('#loginForm').formValidation({
@@ -90,6 +88,24 @@
 		  // });
 			
 		});
+		
+		function reserver() {
+			<?php
+				if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
+					echo 'var loginUtilisateur = '.$_SESSION['login'].';';
+					echo 'var emailUtilisateur = '.$_SESSION['email'].';';
+					echo 'var telUtilisateur = '.$_SESSION['telephone'].';';
+					echo 'var adresseUtilisateur = '.$_SESSION['adresse'].';';
+					echo 'var idUtilisateur = '.$_SESSION['id'].';';
+					
+					echo 'alert(loginUtilisateur+" "+emailUtilisateur + " " + telUtilisateur + " " + adresseUtilisateur + " " + idUtilisateur);';
+				} else {
+					echo 'alert("Veuillez vous connecter!");';
+				}
+			?>
+			
+			
+		}
 
 </script>
 
@@ -225,6 +241,57 @@
 
 
 	<!-- 	RESERVATION -->
+	<form id="reserveationForm" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-xs-3 control-label">Login</label>
+			<div class="col-xs-5">
+				<input type="text" class="form-control" name="loginValue" disabled />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-3 control-label">Téléphone</label>
+			<div class="col-xs-5">
+				<input type="text" class="form-control" name="telValue" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-xs-3 control-label">Email</label>
+			<div class="col-xs-5">
+				<input type="text" class="form-control" name="emailValue" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-3 control-label">Adresse</label>
+			<div class="col-xs-5">
+				<input type="text" class="form-control" name="adresseValue" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-xs-3 control-label">Quantité</label>
+			<div class="col-xs-5">
+				<input type="text" class="form-control" name="quantiteValue" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-3 control-label">Note</label>
+			<div class="col-xs-5">
+				<input type="textarea" class="form-control" name="noteValue" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-9 col-xs-offset-3">
+				<button type="submit" class="btn btn-primary" name="valid" value="Valider">Valider</button>
+			</div>
+		</div>
+	</form>
+
+
 	<div id="dialog-reserver" title="Réservation">
 		<form id="formReserver" class="form-horizontal col-lg-11"
 			action="/gaifaim/reserver">
@@ -297,27 +364,5 @@
 		</form>
 	</div>
 	
-	<!--
-<div class="modal hide fade" id="msgModal">
-	<div class="modal-header">
-	<a class="close" data-dismiss="modal">X</a>
-	<h3>Message</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-		<?php
-			// if (isset($_SESSION['msgErreur'])) {
-				// echo $_SESSION['msgErreur'];
-			// }
-		?>
-		PROBLEME§
-		</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn">Close</a>
-		<a href="#" class="btn btn-primary">Save changes</a>
-	</div>
-</div>
--->
 </body>
 </html>
