@@ -19,6 +19,7 @@ $found_rows = $statement->rowCount();
 
 if($found_rows > 0) { // On as trouvé un membre avec ce couple mdp, login
 	$_SESSION['id'] = $row['id'];
+	$_SESSION['role'] = $row['role'];
 	$_SESSION['login'] = $row['login'];
 	$_SESSION['email'] = $row['email'];
 	$_SESSION['telephone'] = $row['telephone'];
@@ -28,12 +29,13 @@ if($found_rows > 0) { // On as trouvé un membre avec ce couple mdp, login
 else { // Personne n'existe dans la table avec ce couple mdp, login
 	$_SESSION['msgErreur'] = 'Le login et le mot de passe rentrés sont invalides';
 	unset($_SESSION['id']);
+	unset($_SESSION['role']);
 	unset($_SESSION['login']);
 	unset($_SESSION['email']);
 	unset($_SESSION['telephone']);
 	unset($_SESSION['adresse']);
 }
 
-header('Location: index.php');
+header('Location: ../index.php');
 exit();
 ?>

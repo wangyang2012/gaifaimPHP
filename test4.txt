@@ -1,0 +1,144 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link href="jquery/jquery-ui.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="css/gaifaim.css" rel="stylesheet">
+
+<script src="jquery/jquery-1.10.2.js"></script>
+<script src="jquery/jquery-ui.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<title>Gaifaim - Accueil</title>
+
+<script>
+	
+		
+	// dialogue reserver
+	$(document).ready(function() {
+				 $('#basicBootstrapForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+			telValue: {
+                validators: {
+                    notEmpty: {
+                        message: 'Le numéro de téléphone doit être renseigné.'
+                    }
+                }
+            },
+            emailValue: {
+                validators: {
+                    notEmpty: {
+                        message: 'L\'adresse mail doit être renseignée.'
+                    },
+                    emailAddress: {
+                        message: 'L\'adresse mail n\'est pas correct.'
+                    }
+                }
+            },
+			adresseValue: {
+                validators: {
+                    notEmpty: {
+                        message: 'L\'adresse doit être renseignée.'
+                    }
+                }
+            },
+			quantiteValue: {
+                validators: {
+                    notEmpty: {
+                        message: 'La quantité doit être renseignée.'
+                    }
+                }
+            }
+        }
+    });
+		
+		// $('#loginForm').formValidation({
+			// framework: 'bootstrap',
+			// excluded: ':disabled',
+			// icon: {
+				// valid: 'glyphicon glyphicon-ok',
+				// invalid: 'glyphicon glyphicon-remove',
+				// validating: 'glyphicon glyphicon-refresh'
+			// },
+			// fields: {
+				// username: {
+					// validators: {
+						// notEmpty: {
+							// message: 'The username is required'
+						// }
+					// }
+				// },
+				// password: {
+					// validators: {
+						// notEmpty: {
+							// message: 'The password is required'
+						// }
+					// }
+				// }
+			// }
+		// });
+	
+	
+		// $("#dialog-login").hide("slow");
+		
+		   
+		  // $('#formReserver').submit(function(event) {
+			   
+			  // var nom = $('#nom').val();
+			  // var prenom = $('#prenom').val();
+			  // var telephone = $('#telephone').val();
+			  // var adresse = $('#adresse').val();
+			  // var note = $('#note').val();
+			  // var quantite = $('#quantite').val();
+			  // var json = { "nom" : nom, "prenom" : prenom, "telephone" : telephone, "adresse" : adresse, "note" : note, "quantite" : quantite};
+			   
+			// $.ajax({
+				// url: $("#formReserver").attr( "action"),
+				// data: JSON.stringify(json),
+				// type: "POST",
+				 
+				// beforeSend: function(xhr) {
+					// xhr.setRequestHeader("Accept", "application/json");
+					// xhr.setRequestHeader("Content-Type", "application/json");
+				// },
+				// success: function(response) {
+					 
+					// var respContent = "";
+					// if (response != null && response.codeRetour == 1) {
+						// hideFormReserver();
+					// } else {
+						// respContent = "<span class='error'>Une erreur est survenue!</span>";
+						// $("#loginFormResponse").html(respContent);
+					// }
+				// }
+			// });
+			  
+			// event.preventDefault();
+		  // });
+			
+		});
+		
+		function reserver() {
+			var loginUtilisateur = admin;
+			var emailUtilisateur = admin@gaifaim.com;
+			var telUtilisateur = 0612345678;
+			var adresseUtilisateur = 1, rue abc, 75001 Paris;
+			var idUtilisateur = 1;
+			alert(loginUtilisateur+" "+emailUtilisateur + " " + telUtilisateur + " " + adresseUtilisateur + " " + idUtilisateur);
+			$("#reserveationForm").show("slow");			
+			
+		}
+
+</script>
+
+</head>
+<body>
+	<a  onClick="reserver()">RESERVER</a>
+</body>
+</html>

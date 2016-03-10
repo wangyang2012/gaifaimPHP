@@ -10,6 +10,6 @@ if(!empty($_SESSION['login']))
 	unset($_SESSION['adresse']);
 }
 session_destroy();
-header('Location: index.php');
+header('Location: ../index.php');
 exit();
 ?>
