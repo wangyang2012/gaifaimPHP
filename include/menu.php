@@ -15,6 +15,7 @@
 							<a  data-toggle="dropdown" class="dropdown-toggle">ADMIN<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="http://localhost/gaifaimPHP/admin/utilisateurs.php">Utilisateurs</a></li>
+								<li><a href="http://localhost/gaifaimPHP/admin/plats.php">Plats</a></li>
 								<li><a href="#">Menus</a></li>
 								<li><a href="#">Réservations</a></li>
 							</ul>

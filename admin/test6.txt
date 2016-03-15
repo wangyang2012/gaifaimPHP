@@ -1,0 +1,32 @@
+/*Inserting the temporary name into your database won't accomplish anything because it is just that, temporary. You need to save the image somewhere on your server using move_uploaded_file() and then save the new permanent name to your database so that you can use it in html image tags later.*/
+
+$filename = "myimage.jpg";
+$path = "/var/www/images/".$filename;
+$link = "http://domain.com/images/".$filename;
+move_uploaded_file($FILES['file']['tmp_name'], $path);
+$image = mysql_real_escape_string($link);
+if ($_FILES['file']['error'] > 0) {
+    echo "return code : " . $_FILES['FILES']['error'];
+}else{
+    Query("INSERT INTO image(image) VALUES ('".$image."')");
+    echo "FILES has been stored";
+}
+
+
+
+
+
+
+
+<?php 
+require 'lib.php';
+$request=Query('SELECT * FROM image');
+while ($row = mysql_fetch_array($request)) {
+echo '<img src="'.$row['image'].'" />";
+}?>
+
+
+
+
+
+
