@@ -45,8 +45,7 @@
 		 $('a.image').click(function(e){
 			e.preventDefault();
 			var id = $(this).attr('id');
-			
-			var image = document.getElementById("image"+id).innerHTML;
+			var image = document.getElementById(id).innerHTML;
 			$("#imagePlatModal").attr("src", "../pictures/"+image);
 		});
 		
@@ -161,7 +160,7 @@
 						echo '<tr>
 							<td id="titre'.$row['id'].'">'.$row['titre'].'</td>
 							<td id="description'.$row['id'].'">'.$row['description'].'</td>
-							<td><a id="'.$row['id'].'" class="image" data-toggle="modal" data-target="#pictureModal">'.$row['image'].'</a></td>
+							<td><a id="image'.$row['id'].'" class="image" data-toggle="modal" data-target="#pictureModal">'.$row['image'].'</a></td>
 							<td><span id="'.$row['id'].'" class="modify glyphicon glyphicon-pencil"></span></td>
 							<td><span id="'.$row['id'].'" class="delete glyphicon glyphicon-trash"></span></td>
 						  </tr>';
