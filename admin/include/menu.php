@@ -16,7 +16,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="utilisateurs.php">Utilisateurs</a></li>
 						<li><a href="plats.php">Plats</a></li>
-						<li><a href="#">Menus</a></li>
+						<li><a href="menus.php">Menus</a></li>
 						<li><a href="#">Réservations</a></li>
 					</ul>
 				  </li>
@@ -29,7 +29,7 @@
 			if (empty($_SESSION['login']))
 				echo '<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#loginModal">Se connecter</button>';
 			else
-				echo '<div id="bonjour">Bonjour, '. $_SESSION['login'] .'</div>    <a href="actions/deconnexion.php">Deconnexion</a>';
+				echo '<div id="bonjour">Bonjour, '. $_SESSION['login'] .'</div>    <a href="../actions/deconnexion.php">Deconnexion</a>';
 		?>
 	  </div>
 	</div>

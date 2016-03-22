@@ -58,67 +58,6 @@
 			$("#adresseModValue").val(adresse);
 			$('#modifyUserModal').modal('show');
 		});
-		
-		
-		 $('#newUserForm').validate(
-		 {
-		  rules: {
-			loginValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpConfirmValue: {
-				minlength: 2,
-				required: true,
-				equalTo: "#mdpValue"
-			},
-			telValue: {
-			  required: true
-			},
-			emailValue: {
-			  required: true,
-			  email: true
-			},
-			adresseValue: {
-			  required: true
-			}
-		  }
-		 });
-		 
-		 $('#modifyUserForm').validate(
-		 {
-		  rules: {
-			loginModValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpModValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpModConfirmValue: {
-				minlength: 2,
-				required: true,
-				equalTo: "#mdpModValue"
-			},
-			telModValue: {
-			  required: true
-			},
-			emailModValue: {
-			  required: true,
-			  email: true
-			},
-			adresseModValue: {
-			  required: true
-			}
-		  }
-		 });
-		 
-		}); // end document.ready
 
 </script>
 </head>
@@ -137,8 +76,9 @@
 		   <thead>
 			  <tr>
 					<th>Titre</th>
-					<th>Description</th>
-					<th>Image</th>
+					<th>Entrée</th>
+					<th>Plat</th>
+					<th>Dessert</th>
 					<th>Modifier</th>
 					<th>Supprimer</th>
 			  </tr>
@@ -146,14 +86,14 @@
 		   <tbody>
 		   
 			   <?php
-					$query = "SELECT * FROM menus ORDER BY login";
+					$query = "select menu.id as id, menu.titre as titre, p1.titre as entree, p2.titre as plat, p3.titre as dessert from menu join plat p1 on menu.entree = p1.id join plat p2 on menu.plat = p2.id join plat p3 on menu.dessert = p3.id order by menu.titre;";
 					$rows = $pdo->query($query)->fetchAll();
 					foreach($rows as $row) {
 						echo '<tr>
-							<td id="login'.$row['id'].'">'.$row['login'].'</td>
-							<td id="telephone'.$row['id'].'">'.$row['telephone'].'</td>
-							<td id="email'.$row['id'].'">'.$row['email'].'</td>
-							<td id="adresse'.$row['id'].'">'.$row['adresse'].'</td>
+							<td id="titre'.$row['id'].'">'.$row['titre'].'</td>
+							<td id="entree'.$row['id'].'">'.$row['entree'].'</td>
+							<td id="plat'.$row['id'].'">'.$row['plat'].'</td>
+							<td id="dessert'.$row['id'].'">'.$row['dessert'].'</td>
 							<td><span id="'.$row['id'].'" class="modify glyphicon glyphicon-pencil"></span></td>
 							<td><span id="'.$row['id'].'" class="delete glyphicon glyphicon-trash"></span></td>
 						  </tr>';

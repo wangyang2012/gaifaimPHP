@@ -33,21 +33,25 @@ DELETE FROM `jour_has_menu`;
 -- Export de la structure de table gaifaim. menu
 CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plat1` int(11) NOT NULL,
-  `plat2` int(11) NOT NULL,
-  `plat3` int(11) NOT NULL,
+  `entree` int(11) NOT NULL,
+  `plat` int(11) NOT NULL,
+  `dessert` int(11) NOT NULL,
+  `titre` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_plat1_idx` (`plat1`),
-  KEY `fk_plat2_idx` (`plat2`),
-  KEY `fk_plat3_idx` (`plat3`),
-  CONSTRAINT `fk_plat1` FOREIGN KEY (`plat1`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_plat2` FOREIGN KEY (`plat2`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_plat3` FOREIGN KEY (`plat3`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `fk_plat1_idx` (`entree`),
+  KEY `fk_plat2_idx` (`plat`),
+  KEY `fk_plat3_idx` (`dessert`),
+  CONSTRAINT `fk_plat1` FOREIGN KEY (`entree`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_plat2` FOREIGN KEY (`plat`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_plat3` FOREIGN KEY (`dessert`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Export de données de la table gaifaim.menu : ~0 rows (environ)
+-- Export de données de la table gaifaim.menu : ~1 rows (environ)
 DELETE FROM `menu`;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` (`id`, `entree`, `plat`, `dessert`, `titre`) VALUES
+	(1, 2, 1, 4, 'Menu 1'),
+	(2, 3, 5, 6, 'Menu 2');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 
 
@@ -65,12 +69,12 @@ CREATE TABLE IF NOT EXISTS `plat` (
 DELETE FROM `plat`;
 /*!40000 ALTER TABLE `plat` DISABLE KEYS */;
 INSERT INTO `plat` (`id`, `description`, `titre`, `image`) VALUES
-	(10, 'tomate', 'Tomate aux oeufs', 'tomate.jpg'),
-	(11, 'Salade', 'Salade', 'salade.jpg'),
-	(13, 'entrÃ©e', 'Nem', 'nem.jpg'),
-	(14, 'Dessert', 'CrÃªpe', 'crepe.jpg'),
-	(15, 'Marquereau', 'Poisson', 'marquereau.jpg'),
-	(16, 'Dessert', 'GÃ¢teau', 'gateau.JPG');
+	(1, 'tomate', 'Tomate aux oeufs', 'tomate.jpg'),
+	(2, 'Salade', 'Salade', 'salade.jpg'),
+	(3, 'entrÃ©e', 'Nem', 'nem.jpg'),
+	(4, 'Dessert', 'CrÃªpe', 'crepe.jpg'),
+	(5, 'Marquereau', 'Poisson', 'marquereau.jpg'),
+	(6, 'Dessert', 'GÃ¢teau', 'gateau.JPG');
 /*!40000 ALTER TABLE `plat` ENABLE KEYS */;
 
 

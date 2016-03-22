@@ -16,7 +16,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="admin/utilisateurs.php">Utilisateurs</a></li>
 								<li><a href="admin/plats.php">Plats</a></li>
-								<li><a href="#">Menus</a></li>
+								<li><a href="admin/menus.php">Menus</a></li>
 								<li><a href="#">Réservations</a></li>
 							</ul>
 						  </li>
