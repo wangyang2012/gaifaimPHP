@@ -1,7 +1,7 @@
 <html>
 <head>
 <?php
-	include "../include/libs.php";
+	include "include/libs.php";
 ?>
 
 <title>Gaifaim - Plats</title>
@@ -29,14 +29,14 @@
 	
 	$(document).ready(function(){
 		 
-		 // Supprimer l'utilisateur
+		 // Supprimer le plat
 		 $('span.delete').click(function(e){
 			e.preventDefault();
 			var id = $(this).attr('id');
 			var parent = $(this).parent();
 			
 			var data = "id=" + id;
-			$.post('actions/deleteUser.php', data);
+			$.post('actions/deletePlat.php', data);
 			setTimeout(location.reload(), 60000);
 		 
 		});
@@ -50,83 +50,23 @@
 		});
 		
 		
-		// Modifier utilisateur
+		// Modifier le plat
 		 $('span.modify').click(function(e){
 			e.preventDefault();
 			var id = $(this).attr('id');
 			
-			var login = document.getElementById("login"+id).innerHTML;
-			var telephone = document.getElementById("telephone"+id).innerHTML;
-			var email = document.getElementById("email"+id).innerHTML;
-			var adresse = document.getElementById("adresse"+id).innerHTML;
+			var titre = document.getElementById("titre"+id).innerHTML;
+			var description = document.getElementById("description"+id).innerHTML;
+			var image = document.getElementById("image"+id).innerHTML;
 			
 			$("#idModValue").val(id);
-			$("#loginModValue").val(login);
-			$("#telModValue").val(telephone);
-			$("#emailModValue").val(email);
-			$("#adresseModValue").val(adresse);
-			$('#modifyUserModal').modal('show');
+			$("#titreModValue").val(titre);
+			$("#descriptionModValue").val(description);
+			$("#imageModValue").val("");
+			// document.getElementById("uploadCaptureInputFile").value = "";
+			$('#modifyPlatModal').modal('show');
 		});
-		
-		 $('#newUserForm').validate(
-		 {
-		  rules: {
-			loginValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpConfirmValue: {
-				minlength: 2,
-				required: true,
-				equalTo: "#mdpValue"
-			},
-			telValue: {
-			  required: true
-			},
-			emailValue: {
-			  required: true,
-			  email: true
-			},
-			adresseValue: {
-			  required: true
-			}
-		  }
-		 });
-		 
-		 $('#modifyUserForm').validate(
-		 {
-		  rules: {
-			loginModValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpModValue: {
-			  minlength: 2,
-			  required: true
-			},
-			mdpModConfirmValue: {
-				minlength: 2,
-				required: true,
-				equalTo: "#mdpModValue"
-			},
-			telModValue: {
-			  required: true
-			},
-			emailModValue: {
-			  required: true,
-			  email: true
-			},
-			adresseModValue: {
-			  required: true
-			}
-		  }
-		 });
-		 
-		}); // end document.ready
+	}); // end document.ready
 
 </script>
 </head>
@@ -184,7 +124,7 @@
 				</div>
 
 				<div class="modal-body">
-					<img id="imagePlatModal" alt="Image indisponible"/>
+					<img id="imagePlatModal" alt="Image indisponible" max-width:100%; max-height:100%;/>
 				</div>
 			</div>
 		</div>
@@ -203,49 +143,28 @@
 
 				<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-					<form id="newPlatForm" class="form-horizontal" action="actions/newPlat.php" method="post">
+					<form id="newPlatForm" class="form-horizontal" action="actions/newPlat.php" method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Login*</label>
+							<label class="col-lg-3 control-label">Titre</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" name="loginValue" id="loginValue" />
+								<input type="text" class="form-control" name="titreValue" id="titreValue" />
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Mot de passe*</label>
+							<label class="col-lg-3 control-label">Description</label>
 							<div class="col-lg-9">
-								<input type="password" class="form-control" name="mdpValue" id="mdpValue" />
+								<input type="textarea" class="form-control" name="descriptionValue" id="descriptionValue" />
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Confirmer mot de passe*</label>
+							<label class="col-lg-3 control-label">Image</label>
 							<div class="col-lg-9">
-								<input type="password" class="form-control" name="mdpConfirmValue" id="mdpConfirmValue" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Téléphone*</label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control" name="telValue" id="telValue" />
+								<input type="file" class="form-control" name="imageValue" id="imageValue" />
 							</div>
 						</div>
 						
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Email*</label>
-							<div class="col-lg-9">
-								<input type="text" data-validation="email" class="form-control" name="emailValue" id="emailValue" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Adresse*</label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control" name="adresseValue" id="adresseValue" />
-							</div>
-						</div>
-
 						<div class="form-group">
 							<div class="col-lg-9 col-lg-offset-3">
 								<button type="submit" class="btn btn-primary" name="valid" value="Valider">Valider</button>
@@ -260,59 +179,38 @@
 	
 	
 	<!-- MODAL MODIFICATION COMPTE -->
-	<div class="modal fade" id="modifyUserModal" tabindex="-1" role="dialog" aria-labelledby="ModifyUser" aria-hidden="true">
+	<div class="modal fade" id="modifyPlatModal" tabindex="-1" role="dialog" aria-labelledby="ModifyPlat" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h5 class="modal-title">Modification du compte</h5>
+					<h5 class="modal-title">Modification du plat</h5>
 				</div>
 
 				<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-					<form id="modifyUserForm" class="form-horizontal" action="actions/modifyUser.php" method="post">
+					<form id="modifyPlatForm" class="form-horizontal" action="actions/modifyPlat.php" method="post" enctype="multipart/form-data">
 						<input type="hidden" class="form-control" name="idModValue" id="idModValue"/>
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Login</label>
+							<label class="col-lg-3 control-label">Titre</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" name="loginModValue" id="loginModValue" />
+								<input type="text" class="form-control" name="titreModValue" id="titreModValue" />
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Mot de passe*</label>
+							<label class="col-lg-3 control-label">Description</label>
 							<div class="col-lg-9">
-								<input type="password" class="form-control" name="mdpModValue" value="999999" id="mdpModValue" />
+								<input type="textarea" class="form-control" name="descriptionModValue" id="descriptionModValue" />
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-lg-3 control-label">Confirmer mot de passe*</label>
+							<label class="col-lg-3 control-label">Image</label>
 							<div class="col-lg-9">
-								<input type="password" class="form-control" name="mdpModConfirmValue" value="999999" id="mdpModConfirmValue" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Téléphone*</label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control" name="telModValue" id="telModValue" />
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Email*</label>
-							<div class="col-lg-9">
-								<input type="text" data-validation="email" class="form-control" name="emailModValue" id="emailModValue" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-lg-3 control-label">Adresse*</label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control" name="adresseModValue" id="adresseModValue" />
+								<input type="file" class="form-control" name="imageModValue" id="imageModValue" />
 							</div>
 						</div>
 

@@ -1,7 +1,7 @@
 <html>
 <head>
 <?php
-	include "../include/libs.php";
+	include "include/libs.php";
 ?>
 
 <title>Gaifaim - Menus</title>

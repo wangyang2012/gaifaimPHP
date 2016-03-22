@@ -17,30 +17,34 @@ USE `gaifaim`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
 --
--- Table structure for table `jour_has_menu`
+-- Table structure for table `plat`
 --
 
-DROP TABLE IF EXISTS `jour_has_menu`;
+DROP TABLE IF EXISTS `plat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jour_has_menu` (
-  `jour` datetime NOT NULL,
-  `id_menu` int(11) NOT NULL,
-  PRIMARY KEY (`jour`,`id_menu`),
-  KEY `fk_menu_jour_idx` (`id_menu`),
-  CONSTRAINT `fk_menu_jour` FOREIGN KEY (`id_menu`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `plat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `titre` varchar(45) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `jour_has_menu`
+-- Dumping data for table `plat`
 --
 
-LOCK TABLES `jour_has_menu` WRITE;
-/*!40000 ALTER TABLE `jour_has_menu` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jour_has_menu` ENABLE KEYS */;
+LOCK TABLES `plat` WRITE;
+/*!40000 ALTER TABLE `plat` DISABLE KEYS */;
+INSERT INTO `plat` VALUES (1,'Plat_test aubergine','plat_Test','aubergine.jpg');
+/*!40000 ALTER TABLE `plat` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `menu`
@@ -73,32 +77,33 @@ LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
--- Table structure for table `plat`
+-- Table structure for table `jour_has_menu`
 --
 
-DROP TABLE IF EXISTS `plat`;
+DROP TABLE IF EXISTS `jour_has_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `plat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
-  `titre` varchar(45) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+CREATE TABLE `jour_has_menu` (
+  `jour` datetime NOT NULL,
+  `id_menu` int(11) NOT NULL,
+  PRIMARY KEY (`jour`,`id_menu`),
+  KEY `fk_menu_jour_idx` (`id_menu`),
+  CONSTRAINT `fk_menu_jour` FOREIGN KEY (`id_menu`) REFERENCES `plat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `plat`
+-- Dumping data for table `jour_has_menu`
 --
 
-LOCK TABLES `plat` WRITE;
-/*!40000 ALTER TABLE `plat` DISABLE KEYS */;
-INSERT INTO `plat` VALUES (1,'Plat_test aubergine','plat_Test','aubergine.jpg');
-/*!40000 ALTER TABLE `plat` ENABLE KEYS */;
+LOCK TABLES `jour_has_menu` WRITE;
+/*!40000 ALTER TABLE `jour_has_menu` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jour_has_menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
 
 --
 -- Table structure for table `reservation`
