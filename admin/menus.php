@@ -43,13 +43,15 @@
 		// Modifier menu
 		 $('span.modify').click(function(e){
 			e.preventDefault();
-			var id = $(this).attr('id');
+			var strIds = $(this).attr('id');
+			var ids = strIds.split("-");
 			
-			var titre = document.getElementById("titre"+id).innerHTML;
-			var entree = document.getElementById("entree"+id).innerHTML;
-			var plat = document.getElementById("plat"+id).innerHTML;
-			var dessert = document.getElementById("dessert"+id).innerHTML;
+			var titre = document.getElementById("titre"+ids[0]).innerHTML;
+			var entree = ids[1];
+			var plat = ids[2];
+			var dessert = ids[3];
 
+			$("#idModValue").val(ids[0]);
 			$("#titreModValue").val(titre);
 			$("#entreeModValue").val(entree);
 			$("#platModValue").val(plat);
@@ -64,7 +66,7 @@
 <body>
 	<div class="container">
 		<?php
-			include "../include/menu.php";
+			include "include/menu.php";
 		?>
 		
 		<table id="tabUtilisateurs" class="table table-bordered table-striped table-hover">
@@ -84,7 +86,7 @@
 		   <tbody>
 		   
 			   <?php
-					$query = "select menu.id as id, menu.titre as titre, p1.titre as entree, p2.titre as plat, p3.titre as dessert from menu join plat p1 on menu.entree = p1.id join plat p2 on menu.plat = p2.id join plat p3 on menu.dessert = p3.id order by menu.titre;";
+					$query = "select menu.id as id, menu.titre as titre, p1.titre as entree, p1.id as entreeId, p2.titre as plat, p2.id as platId, p3.titre as dessert, p3.id as dessertId from menu join plat p1 on menu.entree = p1.id join plat p2 on menu.plat = p2.id join plat p3 on menu.dessert = p3.id order by menu.titre;";
 					$rows = $pdo->query($query)->fetchAll();
 					foreach($rows as $row) {
 						echo '<tr>
@@ -92,7 +94,7 @@
 							<td id="entree'.$row['id'].'">'.$row['entree'].'</td>
 							<td id="plat'.$row['id'].'">'.$row['plat'].'</td>
 							<td id="dessert'.$row['id'].'">'.$row['dessert'].'</td>
-							<td><span id="'.$row['id'].'" class="modify glyphicon glyphicon-pencil"></span></td>
+							<td><span id="'.$row['id'].'-'.$row['entreeId'].'-'.$row['platId'].'-'.$row['dessertId'].'" class="modify glyphicon glyphicon-pencil"></span></td>
 							<td><span id="'.$row['id'].'" class="delete glyphicon glyphicon-trash"></span></td>
 						  </tr>';
 					}

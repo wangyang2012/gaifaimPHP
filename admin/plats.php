@@ -75,7 +75,7 @@
 <body>
 	<div class="container">
 		<?php
-			include "../include/menu.php";
+			include "include/menu.php";
 		?>
 		
 		<table id="tabPlats" class="table table-bordered table-striped table-hover">
