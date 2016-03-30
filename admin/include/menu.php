@@ -17,6 +17,7 @@
 						<li><a href="utilisateurs.php">Utilisateurs</a></li>
 						<li><a href="plats.php">Plats</a></li>
 						<li><a href="menus.php">Menus</a></li>
+						<li><a href="jours_et_menus.php">Jours et Menus</a></li>
 						<li><a href="reservations.php">Réservations</a></li>
 					</ul>
 				  </li>
