@@ -13,6 +13,16 @@
 			echo "alert('".$_SESSION['msgErreur']."');";
 			$_SESSION['msgErreur'] = '';
 		}
+		
+		try
+		{
+			$pdo = new PDO('mysql:host=localhost;dbname=gaifaim', 'root', '');
+		}
+		catch (Exception $e) // Si erreur
+		{
+			$_SESSION['msgErreur'] = 'Une erreur est survenue, veuillez ré-essayer ultérieurement.';
+			die('Erreur : ' . $e->getMessage());
+		}
 	?>
 
 	function reserver() {
@@ -131,8 +141,33 @@
 			<div class="col-lg-5">
 				<div id="menu-midi" class="titre1">MENU MIDI DELICIEUX</div>
 				<br />
-
-				<img src="img/cover.jpg"/>
+				<?php
+					$queryJour = "select * from jour_has_menu where jour= CURDATE() ;";
+					$result = $pdo->prepare($queryJour); 
+					$result->execute(); 
+					$number_of_days = $result->fetchColumn(); 
+					if ($number_of_days > 0) {
+						// afficher menu du jour
+						$query = "select jour, menu.id as id, menu.titre as titre, p1.titre as entree, p1.image as entreeImage, p1.id as entreeId, p2.titre as plat, p2.image as platImage, p2.id as platId, p3.titre as dessert, p3.image as dessertImage, p3.id as dessertId from jour_has_menu join menu on jour_has_menu.id_menu = menu.id join plat p1 on menu.entree = p1.id join plat p2 on menu.plat = p2.id join plat p3 on menu.dessert = p3.id where jour = CURDATE() order by jour;";
+						$rows = $pdo->query($query)->fetchAll();
+						foreach($rows as $row) {
+							echo '<h1>'.$row['entree'].'</h1>
+								  <img src="pictures/'.$row['entreeImage'].'"/>
+								  
+								  <h1>'.$row['plat'].'</h1>
+								  <img src="pictures/'.$row['platImage'].'"/>
+								  
+								  <h1>'.$row['dessert'].'</h1>
+								  <img src="pictures/'.$row['dessertImage'].'"/>
+							';
+						}
+					} else {
+						// ne pas afficher menu du jour
+						echo '<img src="img/cover.jpg"/>';
+					}
+				?>
+				
+				
 				<br />
 				<div id="livraison-gratuite" class="titre1">LIVRAISON GRATUITE</div><br/>
 				<div>

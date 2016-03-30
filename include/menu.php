@@ -1,12 +1,12 @@
 <nav class="navbar navbar-inverse">
 			<div class="navbar-header">
-			  <a class="navbar-brand" href="#">GAI FAIM</a>
+			  <a class="navbar-brand" href="index.php">GAI FAIM</a>
 		    </div>
 	        <div class="container-fluid">
 	          <ul class="nav navbar-nav">
 	            <li class="active"> <a href="index.php">ACCUEIL</a> </li>
 	            <li> <a href="menus.php">MENUS</a> </li>
-	            <li> <a href="#">MES RESERVATIONS</a> </li>
+	            <li> <a href="mes_reservations.php">MES RESERVATIONS</a> </li>
 	            <li> <a href="#">SAVOIR-FAIRE</a> </li>
 				<?php
 					if (isset($_SESSION['role']) && !empty($_SESSION['role']) && $_SESSION['role'] == 1) {

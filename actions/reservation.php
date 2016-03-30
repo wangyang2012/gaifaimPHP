@@ -10,7 +10,7 @@ catch (Exception $e) // Si erreur
     die('Erreur : ' . $e->getMessage());
 }
 
-$req = $bdd->prepare("INSERT INTO reservation (date, id_menu, quantite, login, telephone, email, note) VALUES (now(), :id_menu, :quantite, :login, :telephone, :email, :note)");
+$req = $bdd->prepare("INSERT INTO reservation (jour, id_menu, quantite, login, telephone, email, note) VALUES (CURDATE(), :id_menu, :quantite, :login, :telephone, :email, :note)");
 $req->execute(array(
 	"id_menu" => 1,
 	"quantite" =>$_POST['quantiteValue'],

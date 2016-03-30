@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse">
 	<div class="navbar-header">
-	  <a class="navbar-brand" href="#">GAI FAIM</a>
+	  <a class="navbar-brand" href="../index.php">GAI FAIM</a>
 	</div>
 	<div class="container-fluid">
 	  <ul class="nav navbar-nav">
